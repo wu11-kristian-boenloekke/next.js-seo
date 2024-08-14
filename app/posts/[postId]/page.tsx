@@ -32,7 +32,7 @@ export async function generateMetadata({ params: { postId } }: BlogPostPageProps
             //nu dannes billede fra ImageResponse - api/og/ searchParams postId og title (encodeURIComponent for sikker omkodning af specialtegn i titel til URL string eks. '&' som '%26' )
             images: [
                 {
-                    url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/${aspectRatio}?title=${encodeURIComponent(post.title)}`,
+                    url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${encodeURIComponent(post.title)}`,
                 }
             ]
 

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: 'https://7ezih33v5asnwc4eymklp7tfr4.srv.us/',
     images: [
       {
-        url: 'https://next-js-seo-beige.vercel.app/api/og/1200x630',
+        url: 'localhost:3000/api/og/1200x630',
         width: 1200,
         height: 630,
         alt: ' OG Image',
