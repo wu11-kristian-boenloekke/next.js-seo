@@ -42,6 +42,8 @@ export async function generateMetadata({ params: { postId } }: BlogPostPageProps
             title: post.title,
             description: post.body,
         }
+
+        
     }
 }
 
