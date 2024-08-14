@@ -93,7 +93,9 @@ export default function RootLayout({
         <link crossOrigin=""  rel="preconnect" href="https://instant.page" />
       </head>
       <body className={inter.className}>
-        <header className="p-4 border-black border-b mb-4"><Link href={"/"} className="text-xl font-bold">Next.js SEO test</Link></header>
+        <header className="p-4 border-black border-b mb-4">
+          <Link href={"/"} className="text-xl font-bold">Next.js SEO test</Link>
+        </header>
         {children}
       </body>
     </html>

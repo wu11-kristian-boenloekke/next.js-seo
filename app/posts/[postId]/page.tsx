@@ -1,25 +1,27 @@
-import { BlogPost, BlogPostsResponse } from "@/model/BlogPost";
-import { notFound } from "next/navigation";
-import LikeButton from '@/components/LikeButton';
-import type { Article, WithContext, BlogPosting, BreadcrumbList } from "schema-dts";
-import Head from "next/head";
+import { BlogPost, BlogPostsResponse } from "@/model/BlogPost"
+import { notFound } from "next/navigation"
+import LikeButton from '@/components/LikeButton'
+import type { Article, WithContext, BlogPosting, BreadcrumbList } from "schema-dts"
+import Head from "next/head"
 
 interface BlogPostPageProps {
-    params: { postId: string };
+    params: { postId: string }
 }
 
 //loading pages via params renderes de dynamisk - vi kan omgå dette ved at cache alle posts.id på forhånd så de bliver statisk renderet = SEO og loading optimering
 export async function generateStaticParams() {
-    const response = await fetch("https://dummyjson.com/posts");
-    const { posts }: BlogPostsResponse = await response.json();
+    const response = await fetch("https://dummyjson.com/posts")
+    const { posts }: BlogPostsResponse = await response.json()
 
-    return posts.map(({ id }) => id);
+    return posts.map(({ id }) => id)
 }
 
 export async function generateMetadata({ params: { postId } }: BlogPostPageProps) {
-    const response = await fetch(`https://dummyjson.com/posts/${postId}`);
-    const post: BlogPost = await response.json();
-
+    const response = await fetch(`https://dummyjson.com/posts/${postId}`)
+    const post: BlogPost = await response.json()
+    
+    
+    const aspectRatio = '';
     return {
         title: post.title,
         description: post.body,
@@ -27,20 +29,20 @@ export async function generateMetadata({ params: { postId } }: BlogPostPageProps
             title: post.title,
             description: post.body,
             //Hvis posts havde haft billeder, kunne og:image også genereres dynamisk
-            //   images: [
-            //             {
-            //                 url: post.imageUrl
-            //             }
-            //         ]
-
+            //nu dannes billede fra ImageResponse - api/og/ searchParams postId og title (encodeURIComponent for sikker omkodning af specialtegn i titel til URL string eks. '&' som '%26' )
+            images: [
+                {
+                    url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og/${aspectRatio}?title=${encodeURIComponent(post.title)}`,
+                }
+            ]
 
         },
         twitter: {
             card: "summary_large_image",
             title: post.title,
-            description: post.body
+            description: post.body,
         }
-    };
+    }
 }
 
 //Next deduplicates automatisk den samme fetch request, så når der laves to requests til samme url vil den kun blive eksekveret en gang, og fetched data vil automatisk blive delt mellem metadata og UI
@@ -55,8 +57,8 @@ export async function generateMetadata({ params: { postId } }: BlogPostPageProps
 export default async function BlogPostPage({
     params: { postId },
 }: BlogPostPageProps) {
-    const response = await fetch(`https://dummyjson.com/posts/${postId}`);
-    const post: BlogPost = await response.json();
+    const response = await fetch(`https://dummyjson.com/posts/${postId}`)
+    const post: BlogPost = await response.json()
 
     //naviger til not-found.tsx, istedet for tom side, som info til crawlers ved 404 status 
     if (response.status === 404) {
@@ -100,7 +102,6 @@ export default async function BlogPostPage({
 
     return (
         <>
-            
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -109,6 +110,7 @@ export default async function BlogPostPage({
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(breadCrumbList) }}
                 />
+            
            
             <article className="max-w-prose m-auto space-y-5">
                 <h1 className="text-3xl text-center font-bold">{post.title}</h1>
@@ -116,7 +118,7 @@ export default async function BlogPostPage({
                 <LikeButton />
             </article>
         </>
-    );
+    )
 }
 
 
