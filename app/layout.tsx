@@ -20,22 +20,22 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
   },
 
-  // openGraph: {
-  //   title: 'Nex.js SEO Test',
-  //   description: 'This is a description of the site for social media',
-  //   type: 'website',
-  //   url: 'https://7ezih33v5asnwc4eymklp7tfr4.srv.us/',
-  //   images: [
-  //     {
-  //       url: 'https://localhost:3000/opengraph-image.jpg',
-  //       width: 1200,
-  //       height: 630,
-  //       alt: ' OG Image',
-  //     },
-  //   ],
-  //   siteName: 'Next.jsSEOTest',
-  //   locale: 'en_US',
-  // },
+  openGraph: {
+    title: 'Nex.js SEO Test',
+    description: 'This is a description of the site for social media',
+    type: 'website',
+    url: 'https://7ezih33v5asnwc4eymklp7tfr4.srv.us/',
+    images: [
+      {
+        url: 'https://next-js-seo-beige.vercel.app/api/og/1200x630',
+        width: 1200,
+        height: 630,
+        alt: ' OG Image',
+      },
+    ],
+    siteName: 'Next.jsSEOTest',
+    locale: 'en_US',
+  },
 
   // https://developer.x.com/en/docs/twitter-for-websites/cards/overview/markup
 
