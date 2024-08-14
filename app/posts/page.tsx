@@ -19,7 +19,7 @@ export default async function BlogPage() {
       {posts.map(({ id, title }) => (
         <article key={title}>
           <h2>
-            <Link  href={`/posts/${encodeURIComponent(title)}`} className="text-lg font-bold">
+            <Link href={`/posts/${id}`} className="text-lg font-bold">
               {title}
             </Link>
           </h2>
